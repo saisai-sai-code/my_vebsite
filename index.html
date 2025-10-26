@@ -1,39 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday!</title>
-  <style>
-    body {
-      background: linear-gradient(to right, #ffecd2, #fcb69f);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      padding: 50px;
-      color: #333;
-    }
-    h1 {
-      font-size: 3em;
-      color: #ff4081;
-    }
-    p {
-      font-size: 1.5em;
-      margin-top: 20px;
-    }
-    img {
-      margin-top: 30px;
-      width: 250px;
-      border-radius: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Playfair Display', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #ffe4e1;
+  position: relative;
+}
+
+/* CARD */
+.card {
+  background: rgba(255, 248, 240, 0.95);
+  border-radius: 30px;
+  padding: 50px;
+  width: 500px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 10;
+  animation: fadeInCard 2s ease forwards;
+}
+
+/* TEXT */
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  color: #d4af37;
+  margin-bottom: 10px;
+  animation: slideDown 2s ease forwards;
+}
+.names {
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
+  color: #b22222;
+  margin-bottom: 20px;
+  animation: glow 5s ease-in-out infinite alternate;
+}
+h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 25px;
+  animation: fadeIn 3s ease forwards;
+}
+p {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.8;
+  animation: fadeIn 3s ease forwards;
+}
+
+/* ANIMATIONS */
+@keyframes fadeInCard { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes glow {
+  0% { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffa500; }
+  50% { text-shadow: 0 0 25px #ffd700, 0 0 40px #ff8c00; }
+  100% { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffa500; }
+}
+
+/* FLOWER EMOJIS BACKGROUND */
+.flower {
+  position: absolute;
+  font-size: 24px;
+  animation: floatFlowers linear infinite;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes floatFlowers {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+/* HEART SHOWER */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: fallHeart linear infinite;
+  user-select: none;
+  pointer-events: none;
+  z-index: 15;
+}
+
+@keyframes fallHeart {
+  0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+</style>
 </head>
 <body>
-  <h1>🎉 Happy Birthday! 🎂</h1>
-  <p>Wishing you a day filled with love, laughter, and joy.</p>
-  <p>You are amazing, and you deserve the very best!</p>
 
-  <!-- Replace with your image -->
-  <img src="cake.jpg" alt="Birthday Cake">
+<!-- FLOWER BACKGROUND -->
+<div id="flowers"></div>
+
+<!-- HEART SHOWER -->
+<div id="hearts"></div>
+
+<!-- CARD -->
+<div class="card">
+  <h1>Wedding Invitation</h1>
+  <p class="names">Aarav ❤️ Ananya</p>
+  <h2>are getting married!</h2>
+  <p>
+    We joyfully invite you to celebrate our wedding<br>
+    on <b>Sunday, 21st December 2025</b><br>
+    at <b>Rosewood Garden, Mumbai</b><br><br>
+    Ceremony begins at <b>6:00 PM</b>, followed by dinner and dancing.
+  </p>
+  <p style="margin-top:25px; color:#b22222;">
+    With love,<br>
+    Our families
+  </p>
+</div>
+
+<script>
+  // FLOWER EMOJIS
+  const flowersContainer = document.getElementById('flowers');
+  const flowerEmojis = ["💐","🌸","🌺","🌷","🌹","🌼"];
+  for(let i=0; i<50; i++){
+    let flower = document.createElement('div');
+    flower.classList.add('flower');
+    flower.style.left = Math.random()*window.innerWidth + 'px';
+    flower.style.fontSize = 20 + Math.random()*30 + 'px';
+    flower.style.animationDuration = 5 + Math.random()*10 + 's';
+    flower.innerText = flowerEmojis[Math.floor(Math.random()*flowerEmojis.length)];
+    flowersContainer.appendChild(flower);
+  }
+
+  // HEART SHOWER
+  const heartsContainer = document.getElementById('hearts');
+  for(let i=0; i<30; i++){
+    let heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random()*window.innerWidth + 'px';
+    heart.style.fontSize = 15 + Math.random()*25 + 'px';
+    heart.style.animationDuration = 4 + Math.random()*6 + 's';
+    heart.innerText = '❤️';
+    heartsContainer.appendChild(heart);
+  }
+</script>
 
 </body>
 </html>
